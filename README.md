@@ -14,7 +14,14 @@ A comprehensive Streamlit application for analyzing Medicare hospital performanc
 
 ## Quick Start
 
-### Option 1: Docker (Recommended - Easiest)
+**First, clone the repository:**
+
+```bash
+git clone https://github.com/kaykyndryl/hospital_ratings.git
+cd hospital_ratings
+```
+
+Then choose one of the deployment options below:
 
 **Prerequisites:** Docker and Docker Compose installed
 

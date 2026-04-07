@@ -14,7 +14,35 @@ A comprehensive Streamlit application for analyzing Medicare hospital performanc
 
 ## Quick Start
 
-**First, clone the repository:**
+**First, make sure you have Git installed:**
+
+**On macOS:**
+```bash
+# Install Git using Homebrew
+brew install git
+
+# Verify installation
+git --version
+```
+
+**On Linux (Ubuntu/Debian):**
+```bash
+# Install Git
+sudo apt-get update
+sudo apt-get install -y git
+
+# Verify installation
+git --version
+```
+
+**On Windows:**
+- Download and install [Git for Windows](https://git-scm.com/download/win)
+- Restart your computer
+- Verify in PowerShell or Command Prompt: `git --version`
+
+---
+
+**Then, clone the repository:**
 
 ```bash
 git clone https://github.com/kaykyndryl/hospital_ratings.git

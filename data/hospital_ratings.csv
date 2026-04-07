@@ -1,0 +1,121 @@
+hospital_id,name,street_address,city,county,state,zip_code,overall_rating,mortality_rate_heart_attack,mortality_rate_pneumonia,readmission_rate,safety_score,number_of_comparisons,clabsi_rate
+1,Massachusetts General Hospital,55 Fruit Street,Boston,Suffolk,MA,2114,4.8,8.2,11.5,14.2,95,2850,0.7
+2,Brigham and Women's Hospital,75 Francis Street,Boston,Suffolk,MA,2115,4.7,8.5,12.1,15.3,94,2420,0.63
+3,Beth Israel Deaconess Medical Center,330 Brookline Avenue,Boston,Suffolk,MA,2215,4.6,9.1,12.8,15.9,93,1920,0.77
+4,Boston Medical Center,801 Massachusetts Avenue,Boston,Suffolk,MA,2118,4.4,10.2,14.5,17.1,91,1650,0.95
+5,Lahey Hospital & Medical Center,41 Mall Road,Burlington,Middlesex,MA,1805,4.5,9.3,12.9,16.2,92,1480,0.66
+6,Mount Auburn Hospital,330 Mount Auburn Street,Cambridge,Middlesex,MA,2138,4.5,9.4,13.1,16.4,92,1250,0.66
+7,Winchester Hospital,41 Highland Street,Winchester,Middlesex,MA,1890,4.3,10.8,14.9,17.8,90,520,0.99
+8,Waltham Hospital,Hope Avenue,Waltham,Middlesex,MA,2454,4.2,11.2,15.3,18.5,89,380,0.89
+9,Tufts Medical Center,800 Washington Street,Boston,Suffolk,MA,2111,4.6,9.0,12.6,15.8,93,1580,0.6
+10,New York-Presbyterian Hospital,177 Fort Washington Avenue,New York,New York,NY,10032,4.9,7.8,10.9,13.5,96,4200,0.68
+11,Columbia University Medical Center,622 West 168th Street,New York,New York,NY,10032,4.8,8.1,11.2,14.0,95,2950,0.56
+12,NYU Langone Health,550 First Avenue,New York,New York,NY,10016,4.7,8.6,11.8,14.8,94,2680,0.58
+13,Mount Sinai Hospital,One Gustave L. Levy Place,New York,New York,NY,10029,4.7,8.7,12.0,14.9,94,2520,0.69
+14,Hospital for Special Surgery,535 East 70th Street,New York,New York,NY,10021,4.6,9.2,12.9,15.6,93,1890,0.5
+15,Bellevue Hospital Center,462 First Avenue,New York,New York,NY,10016,4.3,11.0,15.2,18.2,90,1420,0.5
+16,Jamaica Hospital Medical Center,8900 Van Wyck Expressway,Jamaica,Queens,NY,11418,4.1,11.8,16.1,19.3,88,980,0.72
+17,Elmhurst Hospital Center,79-01 Broadway,Elmhurst,Queens,NY,11373,4.0,12.5,17.1,20.4,87,750,0.67
+18,Queens Hospital Center,82-68 164th Street,Jamaica,Queens,NY,11432,3.9,13.2,18.0,21.5,86,620,0.9
+19,Northwell Health System,2000 Marcus Avenue,New Hyde Park,Nassau,NY,11042,4.5,9.5,13.3,16.5,92,1750,0.56
+20,NYU Hospital for Joint Diseases,301 East 17th Street,New York,New York,NY,10003,4.4,10.1,14.0,17.2,91,980,0.51
+21,Stanford Health,300 Pasteur Drive,Palo Alto,Santa Clara,CA,94304,4.8,8.3,11.6,14.3,95,2620,0.84
+22,UCSF Medical Center,500 Parnassus Avenue,San Francisco,San Francisco,CA,94143,4.7,8.8,12.2,15.1,94,2480,0.62
+23,Kaiser Permanente Oakland Medical Center,3600 Broadway,Oakland,Alameda,CA,94611,4.6,9.3,13.0,15.8,93,1850,0.69
+24,Cedars-Sinai Medical Center,8700 Beverly Boulevard,Los Angeles,Los Angeles,CA,90048,4.7,8.6,11.9,14.7,94,2540,0.5
+25,Ronald Reagan Medical Center,757 Westwood Boulevard,Los Angeles,Los Angeles,CA,90024,4.6,9.1,12.7,15.5,93,1960,0.59
+26,USC Norris Cancer Hospital,1441 Eastlake Avenue,Los Angeles,Los Angeles,CA,90033,4.5,9.6,13.4,16.2,92,1420,0.72
+27,Harbor-UCLA Medical Center,1000 West Carson Street,Torrance,Los Angeles,CA,90509,4.2,11.5,15.8,18.9,89,1080,0.6
+28,Olive View-UCLA Medical Center,14445 Olive View Drive,Sylmar,Los Angeles,CA,91342,4.0,12.9,17.5,20.8,87,740,0.88
+29,Scripps Memorial Hospital,354 Santa Fe Drive,Encinitas,San Diego,CA,92024,4.6,9.2,12.8,15.7,93,1680,0.58
+30,UC San Diego Medical Center,200 West Arbor Drive,San Diego,San Diego,CA,92103,4.5,9.7,13.5,16.4,92,1520,0.66
+31,Northwestern Memorial Hospital,251 East Huron Street,Chicago,Cook,IL,60611,4.8,8.1,11.3,14.1,95,2780,0.53
+32,University of Chicago Medical Center,5841 South Maryland Avenue,Chicago,Cook,IL,60637,4.7,8.7,12.0,14.9,94,2350,0.93
+33,Rush University Medical Center,1653 West Congress Parkway,Chicago,Cook,IL,60612,4.7,8.8,12.1,15.0,94,2280,0.65
+34,Advocate Illinois Masonic Medical Center,836 West Wellington Avenue,Chicago,Cook,IL,60657,4.5,9.5,13.2,16.3,92,1580,0.54
+35,Stroger Hospital of Cook County,1901 West Polk Street,Chicago,Cook,IL,60612,4.2,11.2,15.4,18.7,90,1240,0.87
+36,Weiss Memorial Hospital,4646 North Marine Drive,Chicago,Cook,IL,60640,4.1,11.9,16.2,19.5,89,920,0.59
+37,West Suburban Medical Center,3 Erie Court,Oak Park,Cook,IL,60302,4.0,12.6,17.1,20.6,87,680,0.86
+38,Loyola University Medical Center,2160 South First Avenue,Maywood,Cook,IL,60153,4.3,10.8,14.8,17.9,91,1120,0.5
+39,Cleveland Clinic Foundation,9500 Euclid Avenue,Cleveland,Cuyahoga,OH,44195,4.8,8.2,11.4,14.2,95,2850,0.5
+40,University Hospitals Cleveland Medical Center,11100 Euclid Avenue,Cleveland,Cuyahoga,OH,44106,4.6,9.3,13.0,15.9,93,1780,0.7
+41,Summa Health System - Akron City Hospital,525 East Market Street,Akron,Summit,OH,44309,4.4,10.2,14.6,17.2,91,1350,0.84
+42,Aultman Hospital,2600 Sixth Street SW,Canton,Stark,OH,44710,4.3,10.7,15.0,17.9,90,1080,0.78
+43,Cincinnati Children's Hospital Medical Center,3333 Burnet Avenue,Cincinnati,Hamilton,OH,45229,4.7,8.8,12.1,15.0,94,2140,0.63
+44,The Christ Hospital,2139 Auburn Avenue,Cincinnati,Hamilton,OH,45219,4.5,9.5,13.2,16.4,92,1520,0.65
+45,University of Cincinnati Medical Center,234 Goodman Street,Cincinnati,Hamilton,OH,45219,4.4,10.0,14.0,17.1,91,1260,0.5
+46,Miami Valley Hospital,30 East Apple Street,Dayton,Montgomery,OH,45409,4.3,10.6,14.9,17.8,90,1180,0.64
+47,Hospital of Philadelphia,800 Spruce Street,Philadelphia,Philadelphia,PA,19107,4.7,8.9,12.2,15.1,94,2360,0.58
+48,University of Pennsylvania Health System,3400 Spruce Street,Philadelphia,Philadelphia,PA,19104,4.7,8.6,11.9,14.8,94,2480,0.81
+49,Temple University Hospital,3401 North Broad Street,Philadelphia,Philadelphia,PA,19140,4.4,10.1,14.3,17.0,91,1350,0.78
+50,Jefferson Health System,111 South 11th Street,Philadelphia,Philadelphia,PA,19107,4.5,9.6,13.3,16.2,92,1620,0.5
+51,Penn Presbyterian Medical Center,39 and Market Streets,Philadelphia,Philadelphia,PA,19104,4.4,10.2,14.5,17.3,91,1280,0.77
+52,Lankenau Medical Center,100 Medical Center Boulevard,Wynnewood,Delaware,PA,19096,4.4,10.3,14.7,17.5,91,1150,0.67
+53,Mercy Philadelphia Hospital,501 South 54th Street,Philadelphia,Philadelphia,PA,19143,4.1,11.8,16.1,19.2,88,850,0.7
+54,Kennedy Memorial Hospital - Washington,435 Berlin-Clementon Road,Washington,Gloucester,NJ,8034,4.0,12.4,16.9,20.3,87,720,0.92
+55,Massachusetts Eye and Ear,243 Charles Street,Boston,Suffolk,MA,2114,4.8,8.0,11.2,14.0,96,1950,0.75
+56,Emory University Hospital,1365 Clifton Road,Atlanta,Fulton,GA,30322,4.7,8.7,12.0,14.9,94,2320,0.79
+57,Grady Memorial Hospital,80 Jesse Hill Jr Drive,Atlanta,Fulton,GA,30303,4.2,11.3,15.5,18.8,90,1360,0.62
+58,Georgia Baptist Hospital,303 Parkway Drive NE,Atlanta,Fulton,GA,30312,4.4,10.0,14.1,17.0,91,1280,0.68
+59,Northside Hospital,1000 Johnson Ferry Road,Atlanta,Fulton,GA,30342,4.5,9.4,13.2,16.3,92,1580,0.75
+60,Piedmont Hospital,1968 Peachtree Road NW,Atlanta,Fulton,GA,30309,4.6,9.0,12.5,15.5,93,1720,0.82
+61,Duke University Hospital,2301 Erwin Road,Durham,Durham,NC,27710,4.8,8.3,11.6,14.4,95,2680,0.55
+62,UNC Chapel Hill Medical Center,101 Manning Drive,Chapel Hill,Orange,NC,27514,4.7,8.9,12.3,15.2,94,2240,0.62
+63,Charlotte Medical Center,1000 Blythe Boulevard,Charlotte,Mecklenburg,NC,28203,4.5,9.5,13.3,16.4,92,1620,0.53
+64,Atrium Health System,1025 Morehead Medical Drive,Charlotte,Mecklenburg,NC,28204,4.6,9.2,12.8,15.8,93,1840,0.5
+65,Cone Health System,1200 North Elm Street,Greensboro,Guilford,NC,27401,4.4,10.1,14.2,17.1,91,1350,0.85
+66,Wake Forest Baptist Hospital,Medical Center Boulevard,Winston-Salem,Forsyth,NC,27157,4.5,9.6,13.4,16.5,92,1480,0.9
+67,East Carolina University Medical Center,600 Moye Boulevard,Greenville,Pitt,NC,27834,4.3,10.7,14.9,18.0,90,1120,0.74
+68,Vidant Medical Center,2100 Stantonsburg Road,Greenville,Pitt,NC,27835,4.2,11.2,15.4,18.6,89,980,0.93
+69,Johns Hopkins Hospital,600 North Wolfe Street,Baltimore,Baltimore,MD,21287,4.9,7.7,10.7,13.2,96,3150,0.65
+70,University of Maryland Medical Center,22 South Greene Street,Baltimore,Baltimore,MD,21201,4.6,9.4,13.1,16.0,93,1760,0.58
+71,Sinai Hospital of Baltimore,2401 West Belvedere Avenue,Baltimore,Baltimore,MD,21215,4.4,10.2,14.4,17.2,91,1280,0.78
+72,Good Samaritan Hospital,5601 Loch Raven Boulevard,Baltimore,Baltimore,MD,21239,4.3,10.8,15.0,18.0,90,1040,0.98
+73,Medstar Union Memorial Hospital,201 East University Parkway,Baltimore,Baltimore,MD,21218,4.4,10.3,14.6,17.4,91,1150,0.72
+74,Howard County General Hospital,5755 Cedar Lane,Columbia,Howard,MD,21044,4.5,9.7,13.5,16.6,92,1420,0.93
+75,Meritus Medical Center,11116 Medical Campus Road,Hagerstown,Washington,MD,21742,4.2,11.4,15.6,18.9,89,920,0.5
+76,Peninsula Regional Medical Center,100 East Carroll Street,Salisbury,Wicomico,MD,21801,4.1,11.9,16.3,19.6,88,820,0.92
+77,Yale New Haven Hospital,20 York Street,New Haven,New Haven,CT,6510,4.7,8.6,11.8,14.7,94,2420,0.66
+78,Connecticut Hospital,100 Grand Street,New Haven,New Haven,CT,6510,4.4,10.0,14.0,17.0,91,1280,0.68
+79,Hartford Hospital,80 Seymour Street,Hartford,Hartford,CT,6115,4.5,9.5,13.2,16.3,92,1550,0.71
+80,Baystate Medical Center,759 Chestnut Street,Springfield,Hampden,MA,1199,4.4,10.2,14.4,17.2,91,1340,0.5
+81,Springfield Hospital,26 Mountain Street,Springfield,Hampden,MA,1199,4.2,11.3,15.5,18.7,89,950,0.74
+82,Mercy Medical Center,271 Carew Street,Springfield,Hampden,MA,1104,4.1,11.8,16.2,19.4,88,840,0.85
+83,University of Massachusetts Medical School Hospital,55 Lake Avenue North,Worcester,Worcester,MA,1655,4.5,9.6,13.3,16.4,92,1480,0.92
+84,Worcester Medical Center,19 Elm Street,Worcester,Worcester,MA,1608,4.3,10.7,14.8,17.9,90,1120,0.67
+85,Saint Vincent Hospital,123 Summer Street,Worcester,Worcester,MA,1608,4.2,11.2,15.4,18.6,89,980,0.65
+86,Berkshire Medical Center,725 North Street,Pittsfield,Berkshire,MA,1201,4.2,11.3,15.5,18.8,89,940,0.7
+87,Holyoke Medical Center,575 Beech Street,Holyoke,Hampden,MA,1040,4.0,12.6,17.1,20.6,87,680,0.96
+88,Westwood Hospital Center,200 Great Road,Weston,Middlesex,MA,2493,4.3,10.8,14.9,17.9,90,1080,0.8
+89,Beth Israel Hospital,330 Brookline Avenue,Boston,Suffolk,MA,2215,4.5,9.4,13.2,16.3,92,1580,0.62
+90,Hallmark Health System,80 Highland Avenue,Melrose,Middlesex,MA,2176,4.2,11.4,15.6,18.9,89,920,0.85
+91,Care New England,825 Chalkstone Avenue,Providence,Providence,RI,2908,4.4,10.1,14.2,17.1,91,1350,0.74
+92,Rhode Island Hospital,593 Eddy Street,Providence,Providence,RI,2903,4.5,9.5,13.3,16.4,92,1620,0.85
+93,Miriam Hospital,164 Summit Avenue,Providence,Providence,RI,2906,4.4,10.2,14.4,17.2,91,1280,0.62
+94,Hospital of Central Connecticut,100 Grand Street,New Britain,Hartford,CT,6050,4.3,10.7,14.9,17.9,90,1120,0.7
+95,Waterbury Hospital,64 Robbins Street,Waterbury,New Haven,CT,6721,4.2,11.3,15.5,18.8,89,940,0.72
+96,New Britain General Hospital,100 Grand Street,New Britain,Hartford,CT,6050,4.1,11.9,16.2,19.5,88,820,0.58
+97,Stamford Hospital,30 Shelburne Road,Stamford,Fairfield,CT,6902,4.4,10.1,14.1,17.0,91,1310,0.77
+98,Bridgeport Hospital,267 Grant Street,Bridgeport,Fairfield,CT,6602,4.2,11.4,15.7,19.0,89,900,0.81
+99,Danbury Hospital,95 Locust Hill Avenue,Danbury,Fairfield,CT,6810,4.3,10.8,14.9,18.0,90,1130,0.75
+100,Manchester Memorial Hospital,71 Haynes Street,Manchester,Hartford,CT,6040,4.2,11.3,15.5,18.8,89,940,0.74
+101,Lawrence Memorial Hospital,170 Oaks Lane,Medford,Middlesex,MA,2155,4.1,11.8,16.1,19.3,88,810,0.59
+102,Beverly Hospital,85 Herrick Street,Beverly,Essex,MA,1915,4.2,11.4,15.6,18.9,89,920,0.71
+103,Addison Gilbert Hospital,298 Washington Street,Gloucester,Essex,MA,1930,4.1,11.9,16.3,19.6,88,820,0.75
+104,Lowell General Hospital,295 Varnum Street,Lowell,Middlesex,MA,1854,4.2,11.3,15.5,18.8,89,940,0.65
+105,Hahnemann Hospital,245 North 15th Street,Philadelphia,Philadelphia,PA,19102,4.1,11.8,16.1,19.2,88,850,0.78
+106,Einstein Medical Center,5401 Old York Road,Philadelphia,Philadelphia,PA,19141,4.3,10.7,14.8,17.9,90,1120,0.81
+107,Fox Chase Cancer Center,333 Cottman Avenue,Philadelphia,Philadelphia,PA,19111,4.6,9.1,12.6,15.4,93,1680,0.96
+108,Saint Mary's Hospital,2000 Church Street,New Brunswick,Middlesex,NJ,8901,4.2,11.4,15.6,18.9,89,920,0.8
+109,Jersey Shore University Medical Center,1945 State Route 33,Neptune,Monmouth,NJ,7753,4.3,10.8,14.9,17.9,90,1080,0.79
+110,Barnabas Hospital,94 Old Short Hills Road,Short Hills,Essex,NJ,7078,4.4,10.1,14.1,17.0,91,1310,0.71
+111,Morristown Medical Center,100 Madison Avenue,Morristown,Morris,NJ,7960,4.5,9.5,13.2,16.3,92,1580,0.5
+112,Overlook Medical Center,99 Beauvoir Avenue,Summit,Union,NJ,7902,4.4,10.2,14.3,17.1,91,1270,0.72
+113,Saint Barnabas Medical Center,94 Old Short Hills Road,Livingston,Essex,NJ,7039,4.5,9.6,13.3,16.5,92,1480,0.71
+114,Robert Wood Johnson University Hospital,1 Robert Wood Johnson Place,New Brunswick,Middlesex,NJ,8901,4.4,10.2,14.4,17.2,91,1280,1.09
+115,University Medical Center of Princeton,253 Witherspoon Street,Princeton,Mercer,NJ,8540,4.3,10.7,14.9,18.0,90,1120,0.72
+116,Capital Health System - Mercer Campus,446 Bellevue Avenue,Trenton,Mercer,NJ,8607,4.1,11.9,16.2,19.5,88,810,0.85
+117,Sacred Heart Hospital,100 Madison Avenue,Camden,Camden,NJ,8103,4.0,12.4,16.9,20.3,87,720,0.82
+118,Virtua Voorhees Hospital,9 East Evesham Road,Voorhees,Camden,NJ,8043,4.2,11.3,15.4,18.6,89,950,0.6
+119,South Jersey Industries Hospital,25 Kilmer Road,Edison,Middlesex,NJ,8818,4.1,11.8,16.1,19.2,88,840,0.97
+120,Raritan Bay Medical Center,530 New Brunswick Avenue,Perth Amboy,Middlesex,NJ,8861,4.0,12.6,17.0,20.4,87,700,0.94

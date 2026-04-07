@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  hospital-ratings:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - STREAMLIT_SERVER_RUNONCREATE=true
+    volumes:
+      - ./data:/app/data
+      - ./utils:/app/utils
+    restart: unless-stopped

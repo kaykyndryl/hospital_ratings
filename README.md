@@ -18,6 +18,39 @@ A comprehensive Streamlit application for analyzing Medicare hospital performanc
 
 **Prerequisites:** Docker and Docker Compose installed
 
+#### Install Docker and Docker Compose
+
+**On macOS:**
+```bash
+# Install Docker Desktop from https://www.docker.com/products/docker-desktop
+# Docker Desktop includes both Docker and Docker Compose
+# Verify installation:
+docker --version
+docker-compose --version
+```
+
+**On Linux (Ubuntu/Debian):**
+```bash
+# Install Docker
+sudo apt-get update
+sudo apt-get install -y docker.io docker-compose
+
+# Add your user to docker group (to run without sudo)
+sudo usermod -aG docker $USER
+newgrp docker
+
+# Verify installation:
+docker --version
+docker-compose --version
+```
+
+**On Windows:**
+- Download and install [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop)
+- Restart your computer
+- Verify in PowerShell: `docker --version`
+
+#### Run the App with Docker
+
 ```bash
 # Start the app
 docker-compose up
@@ -28,6 +61,8 @@ docker run -p 8501:8501 hospital-ratings
 ```
 
 Then open http://localhost:8501 in your browser.
+
+To stop the app, press `Ctrl+C` or run `docker-compose down`
 
 ### Option 2: Automated Setup Script
 
@@ -115,9 +150,19 @@ Hospital-Ratings/
 
 ## Requirements
 
-- Python 3.8+
-- Docker (for containerized deployment)
-- See `requirements.txt` for Python dependencies
+**For Docker deployment:**
+- Docker 20.10+
+- Docker Compose 1.29+
+- 2GB free disk space
+- Internet connection for initial image download
+
+**For local Python setup:**
+- Python 3.8 or higher
+- pip (Python package manager)
+- 1GB free disk space
+- Internet connection for dependency installation
+
+See `requirements.txt` for specific Python package dependencies
 
 ## Troubleshooting
 

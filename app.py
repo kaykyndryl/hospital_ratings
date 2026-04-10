@@ -381,6 +381,7 @@ if len(filtered_df) > 0:
                             hovermode="x unified",
                             height=350
                         )
+                        fig.update_xaxes(dtick=1)
 
                         st.plotly_chart(fig, use_container_width=True)
 
@@ -492,35 +493,38 @@ if len(filtered_df) > 0:
                     "Select hospitals to compare:",
                     options=state_hospitals,
                     max_selections=2,
+                    help="You can select only 2 hospitals to compare",
                     key="comparison_select"
                 )
 
                 if compare_hospitals:
-                    comparison_list = [hospital.to_dict()]
+                    with st.status("🔍 Analyzing hospital comparison data...", expanded=True) as status:
+                        comparison_list = [hospital.to_dict()]
 
-                    for comp_name in compare_hospitals:
-                        comp_id = current_year_data[current_year_data['name'] == comp_name].iloc[0]['hospital_id']
-                        comp_data = get_hospital_details(current_year_data, comp_id)
-                        comparison_list.append(comp_data.to_dict())
+                        for comp_name in compare_hospitals:
+                            comp_id = current_year_data[current_year_data['name'] == comp_name].iloc[0]['hospital_id']
+                            comp_data = get_hospital_details(current_year_data, comp_id)
+                            comparison_list.append(comp_data.to_dict())
 
-                    # Create comparison visualization
-                    metrics_to_compare = [
-                        ('overall_rating', 'Overall Rating'),
-                        ('safety_score', 'Safety Score'),
-                        ('mortality_rate_heart_attack', 'Mortality (Heart Attack)'),
-                        ('readmission_rate', 'Readmission Rate'),
-                        ('clabsi_rate', 'CLABSI Rate')
-                    ]
+                        # Create comparison visualization
+                        metrics_to_compare = [
+                            ('overall_rating', 'Overall Rating'),
+                            ('safety_score', 'Safety Score'),
+                            ('mortality_rate_heart_attack', 'Mortality (Heart Attack)'),
+                            ('readmission_rate', 'Readmission Rate'),
+                            ('clabsi_rate', 'CLABSI Rate')
+                        ]
 
-                    # Prepare data for comparison chart
-                    chart_data = []
-                    for metric, display_name in metrics_to_compare:
-                        row = {'Metric': display_name}
-                        for hosp in comparison_list:
-                            row[hosp.get('name', 'Unknown')] = float(hosp.get(metric, 0))
-                        chart_data.append(row)
+                        # Prepare data for comparison chart
+                        chart_data = []
+                        for metric, display_name in metrics_to_compare:
+                            row = {'Metric': display_name}
+                            for hosp in comparison_list:
+                                row[hosp.get('name', 'Unknown')] = float(hosp.get(metric, 0))
+                            chart_data.append(row)
 
-                    comparison_df = pd.DataFrame(chart_data)
+                        comparison_df = pd.DataFrame(chart_data)
+                        status.update(label="✅ Analysis complete!", state="complete")
 
                     fig = px.bar(
                         comparison_df,

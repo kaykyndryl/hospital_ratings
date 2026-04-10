@@ -2,20 +2,18 @@
 Analysis engine for hospital performance with rule-based insights.
 Provides root cause analysis and improvement recommendations.
 
-NOTE: OpenAI integration is available in the commented code below - uncomment to activate.
+OpenRouter API integration for AI-enhanced analysis.
 """
 import pandas as pd
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
+import os
+import json
+import logging
+from openai import OpenAI
+from dotenv import load_dotenv
 
-# Commented out OpenAI integration - uncomment to use GPT-4 analysis
-# import os
-# import json
-# import streamlit as st
-# from typing import Optional
-# from openai import AzureOpenAI
-# from dotenv import load_dotenv
-#
-# load_dotenv()
+load_dotenv()
+logger = logging.getLogger(__name__)
 
 
 def _categorize_performance(value, benchmark, is_lower_better=True):
@@ -356,150 +354,138 @@ Key Strengths ({len(analysis['strengths'])} metrics):
 
 
 # ================================================================================
-# OpenAI GPT-4 Integration (Commented Out - Uncomment to Activate)
+# OpenRouter API Integration for AI-Enhanced Analysis
 # ================================================================================
-# Uncomment the following functions to enable AI-powered analysis using Azure OpenAI
-#
-# def _get_openai_client():
-#     """Create Azure OpenAI client from environment variables."""
-#     endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
-#     api_key = os.getenv("AZURE_OPENAI_API_KEY")
-#
-#     if not endpoint or not api_key:
-#         raise ValueError(
-#             "Missing Azure OpenAI credentials. "
-#             "Please set AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_API_KEY in .env"
-#         )
-#
-#     return AzureOpenAI(
-#         api_version="2025-01-01-preview",
-#         azure_endpoint=endpoint,
-#         api_key=api_key
-#     )
-#
-#
-# @st.cache_data
-# def _get_cached_analysis(hospital_id, hospital_name, state):
-#     """Cache key for analysis to avoid duplicate API calls."""
-#     return f"{hospital_id}_{state}"
-#
-#
-# def _prepare_hospital_context(hospital: Dict, df: pd.DataFrame, state: str) -> str:
-#     """Prepare hospital data for AI analysis."""
-#     state_benchmarks = df[df['state'] == state].agg({
-#         'overall_rating': 'mean',
-#         'mortality_rate_heart_attack': 'mean',
-#         'mortality_rate_pneumonia': 'mean',
-#         'readmission_rate': 'mean',
-#         'safety_score': 'mean',
-#         'clabsi_rate': 'mean'
-#     })
-#
-#     national_benchmarks = df.agg({
-#         'overall_rating': 'mean',
-#         'mortality_rate_heart_attack': 'mean',
-#         'mortality_rate_pneumonia': 'mean',
-#         'readmission_rate': 'mean',
-#         'safety_score': 'mean',
-#         'clabsi_rate': 'mean'
-#     })
-#
-#     context = f"""
-# Hospital Performance Data:
-# - Hospital: {hospital['name']}
-# - Location: {hospital['city']}, {hospital['state']}
-# - Overall Rating: {hospital['overall_rating']:.1f} stars
-#
-# Quality Metrics:
-# - Heart Attack Mortality: {hospital['mortality_rate_heart_attack']:.2f}% (State Avg: {state_benchmarks['mortality_rate_heart_attack']:.2f}%, National: {national_benchmarks['mortality_rate_heart_attack']:.2f}%)
-# - Pneumonia Mortality: {hospital['mortality_rate_pneumonia']:.2f}% (State Avg: {state_benchmarks['mortality_rate_pneumonia']:.2f}%, National: {national_benchmarks['mortality_rate_pneumonia']:.2f}%)
-# - Readmission Rate: {hospital['readmission_rate']:.2f}% (State Avg: {state_benchmarks['readmission_rate']:.2f}%, National: {national_benchmarks['readmission_rate']:.2f}%)
-# - Safety Score: {hospital['safety_score']:.0f}/100 (State Avg: {state_benchmarks['safety_score']:.0f}, National: {national_benchmarks['safety_score']:.0f})
-# - CLABSI Rate: {hospital['clabsi_rate']:.2f} per 1K catheter days (State Avg: {state_benchmarks['clabsi_rate']:.2f}, National: {national_benchmarks['clabsi_rate']:.2f})
-# - Patient Comparisons: {int(hospital['number_of_comparisons'])}
-# """
-#     return context
-#
-#
-# def analyze_hospital_performance_with_openai(hospital: Dict, df: pd.DataFrame, state: Optional[str] = None) -> Optional[Dict]:
-#     """Use Azure OpenAI to analyze hospital performance with intelligent insights."""
-#     if not state:
-#         state = hospital['state']
-#
-#     try:
-#         client = _get_openai_client()
-#     except ValueError as e:
-#         st.error(f"Configuration Error: {e}")
-#         return None
-#
-#     cache_key = _get_cached_analysis(hospital['hospital_id'], hospital['name'], state)
-#     if cache_key in st.session_state:
-#         return st.session_state[cache_key]
-#
-#     context = _prepare_hospital_context(hospital, df, state)
-#
-#     prompt = f"""Analyze the following hospital's Medicare quality metrics and provide detailed insights.
-#
-# {context}
-#
-# Provide analysis in JSON format with the following structure:
-# {{
-#     "overall_assessment": "A summary of overall hospital performance (1-2 sentences)",
-#     "strengths": ["List of 2-3 key strengths with specific metrics performing well"],
-#     "weaknesses": ["List of 2-3 key areas needing improvement with specific metrics below benchmark"],
-#     "root_causes": ["List of 2-4 potential root causes based on metric patterns and interdependencies"],
-#     "metric_analysis": {{
-#         "heart_attack_mortality": "Analysis of this metric's performance",
-#         "pneumonia_mortality": "Analysis of this metric's performance",
-#         "readmission_rate": "Analysis of this metric's performance",
-#         "safety_score": "Analysis of this metric's performance",
-#         "clabsi_rate": "Analysis of this metric's performance"
-#     }},
-#     "comparative_insights": "How this hospital compares to state and national benchmarks",
-#     "quality_indicators": "What these metrics tell us about operational excellence and patient care"
-# }}
-#
-# Be specific, data-driven, and actionable. Consider interdependencies between metrics."""
-#
-#     try:
-#         response = client.chat.completions.create(
-#             model="gpt-4o",
-#             messages=[
-#                 {
-#                     "role": "system",
-#                     "content": "You are an expert healthcare quality analyst with deep knowledge of Medicare quality metrics, patient safety, and hospital operations. Provide detailed, actionable analysis based on metric patterns."
-#                 },
-#                 {
-#                     "role": "user",
-#                     "content": prompt
-#                 }
-#             ],
-#             temperature=0.7,
-#             max_tokens=2000
-#         )
-#
-#         analysis_text = response.choices[0].message.content
-#         analysis_json = json.loads(analysis_text)
-#
-#         analysis = {
-#             'hospital_name': hospital['name'],
-#             'benchmark_type': f'state ({state})',
-#             'overall_assessment': analysis_json.get('overall_assessment', ''),
-#             'strengths': analysis_json.get('strengths', []),
-#             'weaknesses': analysis_json.get('weaknesses', []),
-#             'root_causes': analysis_json.get('root_causes', []),
-#             'metric_analysis': analysis_json.get('metric_analysis', {}),
-#             'comparative_insights': analysis_json.get('comparative_insights', ''),
-#             'quality_indicators': analysis_json.get('quality_indicators', ''),
-#             'metrics': _calculate_metric_details(hospital, df, state)
-#         }
-#
-#         st.session_state[cache_key] = analysis
-#         return analysis
-#
-#     except json.JSONDecodeError:
-#         st.error("Failed to parse AI analysis response. Please try again.")
-#         return None
-#     except Exception as e:
-#         st.error(f"Error calling Azure OpenAI API: {str(e)}")
-#         return None
+
+def _get_openrouter_client():
+    """Create OpenRouter client from environment variables."""
+    api_key = os.getenv("OPENROUTER_API_KEY")
+
+    if not api_key:
+        raise ValueError(
+            "Missing OpenRouter API key. "
+            "Please set OPENROUTER_API_KEY in .env file. "
+            "You can also set it directly: OPENROUTER_API_KEY=sk-or-v1-..."
+        )
+
+    return OpenAI(
+        api_key=api_key,
+        base_url="https://openrouter.ai/api/v1",
+    )
+
+
+def _prepare_hospital_context(hospital: Dict, df: pd.DataFrame, state: str) -> str:
+    """Prepare hospital data for AI analysis."""
+    state_benchmarks = df[df['state'] == state].agg({
+        'overall_rating': 'mean',
+        'mortality_rate_heart_attack': 'mean',
+        'mortality_rate_pneumonia': 'mean',
+        'readmission_rate': 'mean',
+        'safety_score': 'mean',
+        'clabsi_rate': 'mean'
+    })
+
+    national_benchmarks = df.agg({
+        'overall_rating': 'mean',
+        'mortality_rate_heart_attack': 'mean',
+        'mortality_rate_pneumonia': 'mean',
+        'readmission_rate': 'mean',
+        'safety_score': 'mean',
+        'clabsi_rate': 'mean'
+    })
+
+    context = f"""
+Hospital Performance Data:
+- Hospital: {hospital['name']}
+- Location: {hospital.get('city', 'N/A')}, {hospital.get('state', 'N/A')}
+- Overall Rating: {hospital['overall_rating']:.1f} stars
+
+Quality Metrics:
+- Heart Attack Mortality: {hospital['mortality_rate_heart_attack']:.2f}% (State Avg: {state_benchmarks['mortality_rate_heart_attack']:.2f}%, National: {national_benchmarks['mortality_rate_heart_attack']:.2f}%)
+- Pneumonia Mortality: {hospital['mortality_rate_pneumonia']:.2f}% (State Avg: {state_benchmarks['mortality_rate_pneumonia']:.2f}%, National: {national_benchmarks['mortality_rate_pneumonia']:.2f}%)
+- Readmission Rate: {hospital['readmission_rate']:.2f}% (State Avg: {state_benchmarks['readmission_rate']:.2f}%, National: {national_benchmarks['readmission_rate']:.2f}%)
+- Safety Score: {hospital['safety_score']:.0f}/100 (State Avg: {state_benchmarks['safety_score']:.0f}, National: {national_benchmarks['safety_score']:.0f})
+- CLABSI Rate: {hospital['clabsi_rate']:.2f} per 1K catheter days (State Avg: {state_benchmarks['clabsi_rate']:.2f}, National: {national_benchmarks['clabsi_rate']:.2f})
+"""
+    return context
+
+
+def get_ai_insights(hospital: Dict, analysis: Dict, recommendations: List[Dict]) -> Optional[Dict]:
+    """Use OpenRouter API to generate AI insights for hospital recommendations."""
+    state = hospital.get('state', 'N/A')
+
+    try:
+        client = _get_openrouter_client()
+    except ValueError as e:
+        logger.warning(f"OpenRouter not configured: {e}")
+        return None
+
+    # Prepare context from base analysis
+    base_analysis = analysis.get('base_analysis', {})
+    hospital_data = analysis.get('hospital_data', {})
+
+    prompt = f"""Analyze the following hospital's Medicare quality metrics and provide deep insights for AI-enhanced recommendations.
+
+Hospital: {hospital['name']}
+State: {state}
+Overall Rating: {hospital['overall_rating']:.1f} stars
+
+Current Performance Metrics:
+- Heart Attack Mortality: {hospital['mortality_rate_heart_attack']:.2f}%
+- Pneumonia Mortality: {hospital['mortality_rate_pneumonia']:.2f}%
+- Readmission Rate: {hospital['readmission_rate']:.2f}%
+- Safety Score: {hospital['safety_score']:.0f}/100
+- CLABSI Rate: {hospital['clabsi_rate']:.2f} per 1K catheter days
+
+Existing Analysis:
+- Overall Assessment: {base_analysis.get('overall_assessment', 'N/A')}
+- Strengths: {', '.join(base_analysis.get('strengths', []))}
+- Weaknesses: {', '.join(base_analysis.get('weaknesses', []))}
+
+Provide analysis in JSON format:
+{{
+    "executive_summary": "1-2 sentence synthesis of hospital performance",
+    "key_insights": ["2-3 specific, actionable insights"],
+    "improvement_priorities": ["Top 3 improvement opportunities ranked by impact"],
+    "comparative_context": "How this hospital compares to peers and benchmarks",
+    "implementation_guidance": "Practical steps for each priority improvement"
+}}
+
+Be specific, data-driven, and focused on actionable outcomes."""
+
+    try:
+        response = client.chat.completions.create(
+            model="openai/gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert healthcare quality analyst with deep knowledge of Medicare quality metrics, patient safety, and hospital operations. Provide detailed, actionable analysis based on metric patterns and evidence-based practices."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.7,
+            max_tokens=1500
+        )
+
+        analysis_text = response.choices[0].message.content
+        try:
+            ai_insights = json.loads(analysis_text)
+        except json.JSONDecodeError:
+            # If JSON parsing fails, wrap the response
+            ai_insights = {
+                "executive_summary": analysis_text,
+                "key_insights": [],
+                "improvement_priorities": [],
+                "comparative_context": "",
+                "implementation_guidance": ""
+            }
+
+        logger.info(f"Generated AI insights for hospital {hospital.get('hospital_id', 'unknown')}")
+        return ai_insights
+
+    except Exception as e:
+        logger.error(f"Error calling OpenRouter API: {str(e)}")
+        return None

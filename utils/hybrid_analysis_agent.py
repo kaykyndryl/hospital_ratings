@@ -36,7 +36,7 @@ def analyze_hospital_longitudinal(hospital: pd.Series, hospital_data: pd.DataFra
         hospital: Hospital data row
         hospital_data: Complete time-series DataFrame
         state: State code for peer comparison
-        include_ai_insights: Whether to include Azure OpenAI insights (if configured)
+        include_ai_insights: Whether to include OpenRouter AI insights (if configured)
 
     Returns:
         Comprehensive analysis dictionary
@@ -235,7 +235,7 @@ def customize_analysis_for_provider(analysis: Dict, recommendations: List[Dict],
 def analyze_with_optional_ai_enhancement(hospital: pd.Series, analysis: Dict,
                                         recommendations: List[Dict]) -> Dict:
     """
-    Optionally enhance analysis with Azure OpenAI if credentials are available.
+    Optionally enhance analysis with OpenRouter API if credentials are available.
 
     Args:
         hospital: Hospital data
@@ -245,22 +245,25 @@ def analyze_with_optional_ai_enhancement(hospital: pd.Series, analysis: Dict,
     Returns:
         Enhanced analysis (or original if AI not available)
     """
-    # Check if Azure OpenAI is configured
+    # Check if OpenRouter API is configured
     try:
         from utils.analysis_agent import get_ai_insights
-        ai_endpoint = os.getenv('AZURE_OPENAI_ENDPOINT')
-        ai_key = os.getenv('AZURE_OPENAI_API_KEY')
+        api_key = os.getenv('OPENROUTER_API_KEY')
 
-        if ai_endpoint and ai_key:
+        if api_key:
             # Get AI enhancement
-            ai_insights = get_ai_insights(hospital, analysis, recommendations)
-            analysis['ai_insights'] = ai_insights
-            analysis['ai_enhanced'] = True
+            ai_insights = get_ai_insights(hospital.to_dict(), analysis, recommendations)
+            if ai_insights:
+                analysis['ai_insights'] = ai_insights
+                analysis['ai_enhanced'] = True
 
-            logger.info(f"Enhanced analysis with AI insights for hospital {hospital['hospital_id']}")
+                logger.info(f"Enhanced analysis with AI insights for hospital {hospital['hospital_id']}")
+            else:
+                analysis['ai_enhanced'] = False
+                logger.debug("OpenRouter API call failed, using rule-based analysis only")
         else:
             analysis['ai_enhanced'] = False
-            logger.debug("Azure OpenAI not configured, using rule-based analysis only")
+            logger.debug("OpenRouter API key not configured, using rule-based analysis only")
 
     except Exception as e:
         logger.warning(f"Could not load AI enhancement: {e}")

@@ -16,9 +16,11 @@ def load_historical_hospital_data():
     data_path = Path(__file__).parent.parent / "data" / "processed" / "hospital_timeseries.csv"
     if data_path.exists():
         df = pd.read_csv(data_path)
-        # Ensure year column is present
+        # Ensure year column is present and integer type
         if 'year' not in df.columns:
             df['year'] = 2024  # Default to current year if missing
+        else:
+            df['year'] = df['year'].astype(int)
         return df
     else:
         # Fallback: use single-year data

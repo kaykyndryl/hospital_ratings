@@ -433,13 +433,62 @@ if len(filtered_df) > 0:
             analysis = analyze_with_optional_ai_enhancement(hospital, analysis, [])
             recommendations = generate_recommendations_with_impact(hospital, analysis, df)
 
-            if recommendations:
+            # Display AI status indicator
+            col1, col2 = st.columns([3, 1])
+            with col1:
                 st.subheader("Recommended Actions with Estimated Impact")
-                st.markdown("""
-                Based on peer hospital performance and historical improvement patterns,
-                each recommendation includes estimated impact potential and timeframe.
-                """)
+            with col2:
+                ai_enhanced = analysis.get('ai_enhanced', False)
+                if ai_enhanced:
+                    st.success("✅ AI-Enhanced Analysis", icon="✒️")
+                else:
+                    st.info("🧮 Rule-Based Analysis", icon="📊")
 
+            st.markdown("""
+            Based on peer hospital performance and historical improvement patterns,
+            each recommendation includes estimated impact potential and timeframe.
+            """)
+
+            # Display AI insights if available
+            if ai_enhanced and analysis.get('ai_insights'):
+                ai_insights = analysis['ai_insights']
+
+                with st.expander("🤖 AI-Powered Insights from OpenRouter", expanded=True):
+                    # Executive Summary
+                    if ai_insights.get('executive_summary'):
+                        st.markdown("**Executive Summary:**")
+                        st.write(ai_insights['executive_summary'])
+                        st.divider()
+
+                    # Key Insights
+                    if ai_insights.get('key_insights'):
+                        st.markdown("**Key Insights:**")
+                        for insight in ai_insights['key_insights']:
+                            st.write(f"• {insight}")
+                        st.divider()
+
+                    # Improvement Priorities
+                    if ai_insights.get('improvement_priorities'):
+                        st.markdown("**Improvement Priorities (Ranked by Impact):**")
+                        for idx, priority in enumerate(ai_insights['improvement_priorities'], 1):
+                            st.write(f"{idx}. {priority}")
+                        st.divider()
+
+                    # Comparative Context
+                    if ai_insights.get('comparative_context'):
+                        st.markdown("**Comparative Context:**")
+                        st.write(ai_insights['comparative_context'])
+                        st.divider()
+
+                    # Implementation Guidance
+                    if ai_insights.get('implementation_guidance'):
+                        st.markdown("**Implementation Guidance:**")
+                        st.write(ai_insights['implementation_guidance'])
+
+                st.markdown("---")
+                st.subheader("Detailed Action Recommendations")
+
+            if recommendations:
                 for idx, rec in enumerate(recommendations[:5], 1):
                     with st.expander(
                         f"**{idx}. {rec.get('metric', '')}: {rec.get('action', '')}** "

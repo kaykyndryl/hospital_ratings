@@ -45,6 +45,43 @@ from utils.hybrid_analysis_agent import (
     analyze_with_optional_ai_enhancement
 )
 
+# Cost estimation mapping for healthcare interventions
+COST_ESTIMATES = {
+    'CLABSI Rate': {
+        'description': 'Central Line Bundle Implementation',
+        'implementation_cost': 15000,
+        'annual_cost': 8000,
+        'cost_breakdown': 'Staff training ($5K), equipment ($7K), monitoring systems ($3K)'
+    },
+    'Readmission Rate': {
+        'description': 'Discharge Planning & Follow-up Program',
+        'implementation_cost': 22000,
+        'annual_cost': 12000,
+        'cost_breakdown': 'Care coordination staff ($12K), telehealth tools ($6K), training ($4K)'
+    },
+    'Mortality Rates': {
+        'description': 'Clinical Pathway Review & Training',
+        'implementation_cost': 18000,
+        'annual_cost': 9000,
+        'cost_breakdown': 'Clinical consultants ($10K), decision support ($5K), staff training ($3K)'
+    },
+    'Safety Score': {
+        'description': 'Patient Safety Culture Program',
+        'implementation_cost': 12000,
+        'annual_cost': 6000,
+        'cost_breakdown': 'Safety coordinator ($5K), training ($4K), systems ($3K)'
+    }
+}
+
+def get_cost_estimate(metric):
+    """Get cost estimate for a specific metric improvement."""
+    return COST_ESTIMATES.get(metric, {
+        'description': 'Process Improvement Initiative',
+        'implementation_cost': 10000,
+        'annual_cost': 5000,
+        'cost_breakdown': 'Planning & implementation costs'
+    })
+
 # Page configuration
 st.set_page_config(
     page_title="Medicare Hospital Ratings - Longitudinal Analysis",
@@ -453,43 +490,51 @@ if len(filtered_df) > 0:
             if ai_enhanced and analysis.get('ai_insights'):
                 ai_insights = analysis['ai_insights']
 
-                with st.expander("🤖 AI-Powered Insights from OpenRouter", expanded=True):
+                with st.expander("🤖 AI-Powered Insights from GPT", expanded=True):
                     # Executive Summary
                     if ai_insights.get('executive_summary'):
-                        st.markdown("**Executive Summary:**")
-                        st.write(ai_insights['executive_summary'])
+                        st.markdown("### Executive Summary")
+                        summary_text = ai_insights['executive_summary']
+                        st.info(summary_text)
                         st.divider()
 
                     # Key Insights
                     if ai_insights.get('key_insights'):
-                        st.markdown("**Key Insights:**")
+                        st.markdown("### Key Insights")
                         for insight in ai_insights['key_insights']:
                             st.write(f"• {insight}")
                         st.divider()
 
                     # Improvement Priorities
                     if ai_insights.get('improvement_priorities'):
-                        st.markdown("**Improvement Priorities (Ranked by Impact):**")
+                        st.markdown("### Improvement Priorities (Ranked by Impact)")
                         for idx, priority in enumerate(ai_insights['improvement_priorities'], 1):
                             st.write(f"{idx}. {priority}")
                         st.divider()
 
                     # Comparative Context
                     if ai_insights.get('comparative_context'):
-                        st.markdown("**Comparative Context:**")
+                        st.markdown("### Comparative Context")
                         st.write(ai_insights['comparative_context'])
                         st.divider()
 
                     # Implementation Guidance
                     if ai_insights.get('implementation_guidance'):
-                        st.markdown("**Implementation Guidance:**")
+                        st.markdown("### Implementation Guidance")
                         st.write(ai_insights['implementation_guidance'])
 
                 st.markdown("---")
-                st.subheader("Detailed Action Recommendations")
+                st.subheader("Detailed Action Recommendations with Estimated Costs")
 
             if recommendations:
+                total_implementation = 0
+                total_annual = 0
+
                 for idx, rec in enumerate(recommendations[:5], 1):
+                    cost_data = get_cost_estimate(rec.get('metric', ''))
+                    total_implementation += cost_data.get('implementation_cost', 0)
+                    total_annual += cost_data.get('annual_cost', 0)
+
                     with st.expander(
                         f"**{idx}. {rec.get('metric', '')}: {rec.get('action', '')}** "
                         f"(Est. {rec.get('estimated_improvement_pct', 0):.1f}% improvement)",
@@ -526,6 +571,29 @@ if len(filtered_df) > 0:
                         if peer_evidence:
                             st.markdown(f"**Evidence:** {peer_evidence.get('hospitals_improved', 0)} of "
                                        f"{peer_evidence.get('hospitals_analyzed', 0)} peer hospitals showed similar improvements")
+
+                        # Cost information
+                        st.divider()
+                        st.markdown("**Estimated Costs:**")
+                        cost_col1, cost_col2 = st.columns(2)
+                        with cost_col1:
+                            st.metric("Implementation Cost", f"${cost_data.get('implementation_cost', 0):,}")
+                        with cost_col2:
+                            st.metric("Annual Operating Cost", f"${cost_data.get('annual_cost', 0):,}")
+                        st.caption(f"Cost Breakdown: {cost_data.get('cost_breakdown', 'N/A')}")
+
+                # Display total costs
+                st.markdown("---")
+                st.subheader("Total Investment Summary")
+                sum_col1, sum_col2, sum_col3 = st.columns(3)
+                with sum_col1:
+                    st.metric("Total Implementation Cost", f"${total_implementation:,}")
+                with sum_col2:
+                    st.metric("Total Annual Cost", f"${total_annual:,}")
+                with sum_col3:
+                    st.metric("ROI Timeframe", "12-24 months")
+                st.info(f"💡 Estimated total investment of ${total_implementation:,} with ${total_annual:,} annual operating costs "
+                       f"for all {len(recommendations[:5])} recommended improvements.")
 
             else:
                 st.info("No recommendations available")

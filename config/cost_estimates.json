@@ -1,0 +1,64 @@
+{
+  "methodology": {
+    "disclaimer": "Cost estimates are based on published healthcare quality improvement literature and industry benchmarks. Actual costs vary significantly by hospital size, region, staffing levels, and existing infrastructure.",
+    "last_updated": "2026-04-10",
+    "note": "These are estimates for educational purposes. Hospitals should validate costs against their own data."
+  },
+  "state_cost_multipliers": {
+    "AL": 0.92, "AK": 1.28, "AZ": 1.05, "AR": 0.88, "CA": 1.32, "CO": 1.10, "CT": 1.25, "DE": 1.18,
+    "FL": 0.98, "GA": 0.95, "HI": 1.35, "ID": 0.98, "IL": 1.08, "IN": 0.92, "IA": 0.90, "KS": 0.91,
+    "KY": 0.89, "LA": 0.90, "ME": 1.02, "MD": 1.15, "MA": 1.28, "MI": 1.02, "MN": 1.08, "MS": 0.85,
+    "MO": 0.94, "MT": 0.96, "NE": 0.92, "NV": 1.08, "NH": 1.12, "NJ": 1.22, "NM": 0.98, "NY": 1.20,
+    "NC": 0.96, "ND": 0.91, "OH": 0.98, "OK": 0.88, "OR": 1.05, "PA": 1.10, "RI": 1.20, "SC": 0.93,
+    "SD": 0.89, "TN": 0.91, "TX": 0.96, "UT": 0.99, "VT": 1.05, "VA": 1.08, "WA": 1.12, "WV": 0.87,
+    "WI": 0.98, "WY": 0.94
+  },
+  "cost_estimates": {
+    "CLABSI Rate": {
+      "description": "Central Line Bundle Implementation",
+      "implementation_cost": 15000,
+      "annual_cost": 8000,
+      "cost_breakdown": "Staff training ($5K), equipment and supplies ($7K), monitoring systems ($3K)",
+      "reference": "IHI Central Line Bundle",
+      "source": "Institute for Healthcare Improvement (IHI) - CLABSI Prevention Bundle",
+      "link": "https://www.ihi.org/Topics/CLABSI/Pages/default.aspx",
+      "citation": "Pronovost et al. (2006). An intervention to decrease catheter-related bloodstream infections in ICUs. NEJM 355:2725-2732"
+    },
+    "Readmission Rate": {
+      "description": "Discharge Planning & Follow-up Program",
+      "implementation_cost": 22000,
+      "annual_cost": 12000,
+      "cost_breakdown": "Care coordination staff ($12K), telehealth tools and platforms ($6K), staff training and protocols ($4K)",
+      "reference": "CMS Readmission Reduction Program",
+      "source": "Centers for Medicare & Medicaid Services (CMS) - Hospital Readmissions Reduction Program",
+      "link": "https://www.cms.gov/Medicare/Medicare-Fees-for-Service-Payment/AcuteInpatientPPS/ReadmissionsReductionProgram",
+      "citation": "Jencks et al. (2009). Rehospitalizations among patients in Medicare fee-for-service programs. NEJM 360:1418-1428"
+    },
+    "Mortality Rates": {
+      "description": "Clinical Pathway Review & Evidence-Based Training",
+      "implementation_cost": 18000,
+      "annual_cost": 9000,
+      "cost_breakdown": "Clinical consultant fees ($10K), decision support system implementation ($5K), multidisciplinary staff training ($3K)",
+      "reference": "AHRQ Patient Safety Network",
+      "source": "Agency for Healthcare Research and Quality (AHRQ) - Clinical Decision Support Systems",
+      "link": "https://psnet.ahrq.gov/primers/primer/7/Clinical-Decision-Support",
+      "citation": "Kuperman et al. (2007). Medication-related clinical decision support in computerized provider order entry systems. J Am Med Inform Assoc 14:338-346"
+    },
+    "Safety Score": {
+      "description": "Patient Safety Culture Program",
+      "implementation_cost": 12000,
+      "annual_cost": 6000,
+      "cost_breakdown": "Patient Safety Officer/Coordinator ($5K), staff training program development ($4K), monitoring and reporting systems ($3K)",
+      "reference": "AHRQ Patient Safety Culture Survey",
+      "source": "Agency for Healthcare Research and Quality (AHRQ) - Safety Culture Assessment",
+      "link": "https://www.ahrq.gov/sops/surveys/index.html",
+      "citation": "Sorra & Dyer (2010). Multilevel Analyses of the AHRQ Hospital Survey on Patient Safety Culture. Agency for Healthcare Research and Quality"
+    }
+  },
+  "default_assumption": {
+    "hospital_size": "Medium (200-500 beds)",
+    "region": "United States",
+    "inflation_adjusted": "2026 dollars"
+  }
+}
+

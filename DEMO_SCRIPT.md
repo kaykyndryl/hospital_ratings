@@ -46,7 +46,7 @@
 3. **Quantified** - You see not just 'improve readmission rates' but '8-15% improvement is achievable' with confidence levels
 4. **Actionable** - Including implementation timeframe and cost-benefit context
 
-*Select an action* Here's an example: If we reduce CLABSI rates through infection prevention protocols, peer data shows hospitals achieve 10-18% improvement in 6-9 months."
+*Select an action* Here's an example: If we reduce CLABSI rates through infection prevention protocols, peer data shows hospitals achieve [10-18%] improvement in [6-9] months."
 
 ---
 

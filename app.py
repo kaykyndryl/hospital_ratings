@@ -44,6 +44,11 @@ from utils.hybrid_analysis_agent import (
     format_trend_summary,
     analyze_with_optional_ai_enhancement
 )
+from utils.cost_calculator import (
+    calculate_metric_cost,
+    calculate_total_costs,
+    get_cost_methodology
+)
 
 # Cost estimation mapping for healthcare interventions
 COST_ESTIMATES = {
@@ -527,13 +532,14 @@ if len(filtered_df) > 0:
                 st.subheader("Detailed Action Recommendations with Estimated Costs")
 
             if recommendations:
-                total_implementation = 0
-                total_annual = 0
+                # Calculate costs based on hospital state
+                cost_totals = calculate_total_costs(recommendations[:5], hospital['state'])
+                total_implementation = cost_totals['total_implementation_cost']
+                total_annual = cost_totals['total_annual_cost']
+                roi_months = cost_totals['estimated_roi_months']
 
                 for idx, rec in enumerate(recommendations[:5], 1):
-                    cost_data = get_cost_estimate(rec.get('metric', ''))
-                    total_implementation += cost_data.get('implementation_cost', 0)
-                    total_annual += cost_data.get('annual_cost', 0)
+                    cost_data = calculate_metric_cost(rec.get('metric', ''), hospital['state'])
 
                     with st.expander(
                         f"**{idx}. {rec.get('metric', '')}: {rec.get('action', '')}** "
@@ -572,28 +578,44 @@ if len(filtered_df) > 0:
                             st.markdown(f"**Evidence:** {peer_evidence.get('hospitals_improved', 0)} of "
                                        f"{peer_evidence.get('hospitals_analyzed', 0)} peer hospitals showed similar improvements")
 
-                        # Cost information
-                        st.divider()
-                        st.markdown("**Estimated Costs:**")
-                        cost_col1, cost_col2 = st.columns(2)
-                        with cost_col1:
-                            st.metric("Implementation Cost", f"${cost_data.get('implementation_cost', 0):,}")
-                        with cost_col2:
-                            st.metric("Annual Operating Cost", f"${cost_data.get('annual_cost', 0):,}")
-                        st.caption(f"Cost Breakdown: {cost_data.get('cost_breakdown', 'N/A')}")
+                        # Cost information with references
+                        if cost_data:
+                            st.divider()
+                            st.markdown("**💰 Estimated Costs** (adjusted for " + hospital['state'] + ")")
+                            cost_col1, cost_col2 = st.columns(2)
+                            with cost_col1:
+                                st.metric("Implementation Cost", f"${cost_data['implementation_cost']:,}")
+                            with cost_col2:
+                                st.metric("Annual Operating Cost", f"${cost_data['annual_cost']:,}")
+
+                            st.caption(f"📋 {cost_data['cost_breakdown']}")
+                            st.caption(f"📚 **Source:** {cost_data['source']}")
+                            if cost_data.get('citation'):
+                                st.caption(f"📖 **Citation:** {cost_data['citation']}")
+                            if cost_data.get('link'):
+                                st.caption(f"🔗 [Learn More]({cost_data['link']})")
 
                 # Display total costs
                 st.markdown("---")
-                st.subheader("Total Investment Summary")
+                st.subheader("💼 Total Investment Summary")
                 sum_col1, sum_col2, sum_col3 = st.columns(3)
                 with sum_col1:
                     st.metric("Total Implementation Cost", f"${total_implementation:,}")
                 with sum_col2:
                     st.metric("Total Annual Cost", f"${total_annual:,}")
                 with sum_col3:
-                    st.metric("ROI Timeframe", "12-24 months")
-                st.info(f"💡 Estimated total investment of ${total_implementation:,} with ${total_annual:,} annual operating costs "
-                       f"for all {len(recommendations[:5])} recommended improvements.")
+                    st.metric("Estimated ROI", f"{roi_months} months")
+
+                st.markdown(f"""
+                <div style="background-color: #e8f4f8; border-left: 4px solid #1f77b4; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                    <strong>Investment Overview:</strong> Estimated total implementation cost of <strong>${total_implementation:,}</strong>
+                    with <strong>${total_annual:,}</strong> annual operating costs for all {len(recommendations[:5])} recommended improvements.
+                    Expected ROI timeframe: <strong>{roi_months} months</strong>.
+                    <br><br>
+                    <small><em>Costs are adjusted for {hospital['state']} based on regional healthcare economics multiplier.
+                    Industry benchmarks from IHI, CMS, and AHRQ. Hospitals should validate against local cost data.</em></small>
+                </div>
+                """, unsafe_allow_html=True)
 
             else:
                 st.info("No recommendations available")
